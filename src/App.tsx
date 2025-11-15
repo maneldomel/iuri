@@ -60,23 +60,23 @@ function App() {
   }, [contentRevealed, scrollRequested]);
 
   useEffect(() => {
-    const button = sixBottleButtonRef.current;
-    if (!button) return;
+    const scrollTarget = document.getElementById('vturb-scroll-target');
+    if (!scrollTarget) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting && !contentRevealed) {
-            console.log('Botão ficou visível - revelando conteúdo');
+            console.log('Scroll detectado - revelando conteúdo');
             setContentRevealed(true);
             setScrollRequested(true);
           }
         });
       },
-      { threshold: 0.1 }
+      { threshold: 0.01 }
     );
 
-    observer.observe(button);
+    observer.observe(scrollTarget);
 
     return () => observer.disconnect();
   }, [contentRevealed]);
@@ -448,17 +448,15 @@ function App() {
             <vturb-smartplayer id="vid-69124ec0b910e6e322c32a69" style={{ display: 'block', margin: '0 auto', width: '100%', maxWidth: '400px' }}></vturb-smartplayer>
           </div>
 
-          {/* 🔧 CORREÇÃO: Botão invisível removido - não precisa da classe de scroll */}
           <div
+            id="vturb-scroll-target"
+            className="smartplayer-scroll-event"
             style={{
-              position: 'absolute',
-              bottom: '-50px',
-              left: '50%',
-              transform: 'translateX(-50%)',
               width: '1px',
               height: '1px',
               opacity: 0,
-              pointerEvents: 'none'
+              pointerEvents: 'none',
+              margin: '20px auto'
             }}
             aria-hidden="true"
           />
@@ -499,13 +497,8 @@ function App() {
                 <button
                   ref={sixBottleButtonRef}
                   id="six-bottle-button"
-                  data-scroll-target="offers"
                   onClick={() => window.location.href = 'https://pay.erectosbrutallis.com/checkout/197875571:1'}
-                  className="smartplayer-scroll-event w-full max-w-md mx-auto bg-[#FFD600] text-gray-900 py-3 md:py-6 rounded-full font-bold hover:bg-[#FFC400] transition-all shadow-lg text-base md:text-2xl mb-3 md:mb-6"
-                  style={{
-                    visibility: 'visible',
-                    pointerEvents: 'auto'
-                  }}
+                  className="w-full max-w-md mx-auto bg-[#FFD600] text-gray-900 py-3 md:py-6 rounded-full font-bold hover:bg-[#FFC400] transition-all shadow-lg text-base md:text-2xl mb-3 md:mb-6"
                 >
                   CLAIM OFFER NOW
                 </button>
