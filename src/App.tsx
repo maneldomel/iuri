@@ -60,101 +60,33 @@ function App() {
   }, [contentRevealed, scrollRequested]);
 
   useEffect(() => {
-    const detectVturbScrollAttempt = () => {
-      const interval = setInterval(() => {
-        const button = sixBottleButtonRef.current;
-        if (button && !contentRevealed) {
-          const observer = new MutationObserver(() => {
-            if (!contentRevealed) {
-              setContentRevealed(true);
-              setScrollRequested(true);
-            }
-          });
+    const handleMessage = (event: MessageEvent) => {
+      console.log('Mensagem recebida:', event.data);
 
-          observer.observe(button, {
-            attributes: true,
-            attributeFilter: ['class', 'style']
-          });
+      if (event.data && typeof event.data === 'object') {
+        const data = event.data;
 
-          return () => observer.disconnect();
-        }
-      }, 500);
+        if (data.smartplayer_id ||
+            data.type === 'smartplayer' ||
+            data.event === 'scroll_target' ||
+            data.scrollTarget ||
+            (data.type && data.type.includes('scroll')) ||
+            (data.event && data.event.includes('scroll'))) {
 
-      return () => clearInterval(interval);
-    };
-
-    const cleanup = detectVturbScrollAttempt();
-
-    const handleScrollEvent = (e: Event) => {
-      const target = e.target as HTMLElement;
-      if (target?.classList?.contains('smartplayer-scroll-event') ||
-          target?.hasAttribute('data-scroll-target')) {
-        if (!contentRevealed) {
-          e.preventDefault();
-          e.stopPropagation();
+          console.log('Evento de scroll detectado! Revelando conteúdo...');
           setContentRevealed(true);
           setScrollRequested(true);
         }
       }
     };
 
-    document.addEventListener('click', handleScrollEvent, true);
-
-    const checkVturbPlayer = setInterval(() => {
-      const players = document.querySelectorAll('vturb-smartplayer');
-      players.forEach((player: any) => {
-        if (player && !player._scrollDetectorAdded) {
-          player._scrollDetectorAdded = true;
-
-          player.addEventListener('smartplayer-scroll', () => {
-            if (!contentRevealed) {
-              setContentRevealed(true);
-              setScrollRequested(true);
-            }
-          });
-
-          const iframe = player.querySelector('iframe');
-          if (iframe) {
-            iframe.addEventListener('load', () => {
-              try {
-                const iframeWindow = iframe.contentWindow;
-                if (iframeWindow) {
-                  iframeWindow.addEventListener('message', (event: MessageEvent) => {
-                    if (event.data?.type === 'smartplayer-scroll' ||
-                        event.data?.action === 'scroll') {
-                      if (!contentRevealed) {
-                        setContentRevealed(true);
-                        setScrollRequested(true);
-                      }
-                    }
-                  });
-                }
-              } catch (e) {
-                console.log('Cross-origin iframe - usando método alternativo');
-              }
-            });
-          }
-        }
-      });
-    }, 500);
-
-    window.addEventListener('message', (event: MessageEvent) => {
-      if (event.data?.type === 'smartplayer-scroll' ||
-          event.data?.action === 'scroll' ||
-          event.data?.event === 'scroll') {
-        if (!contentRevealed) {
-          setContentRevealed(true);
-          setScrollRequested(true);
-        }
-      }
-    });
+    window.addEventListener('message', handleMessage);
+    console.log('Listener de mensagens instalado. Aguardando evento do vturb...');
 
     return () => {
-      cleanup();
-      document.removeEventListener('click', handleScrollEvent, true);
-      clearInterval(checkVturbPlayer);
+      window.removeEventListener('message', handleMessage);
     };
-  }, [contentRevealed]);
+  }, []);
 
   useEffect(() => {
     const heroVideoScript = 'https://scripts.converteai.net/6c140fb2-fd70-48d5-8d70-c2f66a937ef9/players/69124ec0b910e6e322c32a69/v4/player.js';
