@@ -71,16 +71,28 @@ function App() {
       }
     };
 
+    const getRevealDelay = () => {
+      const saved = localStorage.getItem('revealDelay');
+      return saved ? parseInt(saved) * 1000 : 10000;
+    };
+
     const revealTimer = setTimeout(() => {
       if (!contentRevealed) {
         setContentRevealed(true);
       }
-    }, 10000);
+    }, getRevealDelay());
+
+    const handleDelayChange = (event: Event) => {
+      const customEvent = event as CustomEvent;
+      clearTimeout(revealTimer);
+    };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('revealDelayChange', handleDelayChange);
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('revealDelayChange', handleDelayChange);
       clearTimeout(revealTimer);
     };
   }, [contentRevealed]);

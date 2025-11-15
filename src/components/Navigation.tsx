@@ -1,10 +1,21 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Home } from 'lucide-react';
-import { useState } from 'react';
+import { Menu, X, Home, Clock } from 'lucide-react';
+import { useState, useEffect } from 'react';
 
 function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const [revealDelay, setRevealDelay] = useState(() => {
+    const saved = localStorage.getItem('revealDelay');
+    return saved ? parseInt(saved) : 10;
+  });
+
+  const isDevelopment = import.meta.env.DEV;
+
+  useEffect(() => {
+    localStorage.setItem('revealDelay', revealDelay.toString());
+    window.dispatchEvent(new CustomEvent('revealDelayChange', { detail: revealDelay }));
+  }, [revealDelay]);
 
   const routes = [
     { path: '/', label: 'Home' },
@@ -15,6 +26,10 @@ function Navigation() {
     { path: '/up23', label: 'Upsell 23' },
     { path: '/up26', label: 'Upsell 26' },
   ];
+
+  if (!isDevelopment) {
+    return null;
+  }
 
   return (
     <>
@@ -34,12 +49,54 @@ function Navigation() {
       )}
 
       <nav
-        className={`fixed top-0 right-0 h-full w-72 bg-white shadow-2xl z-40 transform transition-transform duration-300 ease-in-out ${
+        className={`fixed top-0 right-0 h-full w-80 bg-white shadow-2xl z-40 transform transition-transform duration-300 ease-in-out overflow-y-auto ${
           isOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
         <div className="p-6 pt-20">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">Navigation</h2>
+          <h2 className="text-2xl font-bold text-gray-900 mb-6">Dev Menu</h2>
+
+          <div className="mb-8 p-4 bg-gray-50 rounded-lg border border-gray-200">
+            <div className="flex items-center gap-2 mb-3">
+              <Clock size={20} className="text-[#B80000]" />
+              <h3 className="font-semibold text-gray-900">Content Reveal Timer</h3>
+            </div>
+            <p className="text-sm text-gray-600 mb-3">Time until content appears (seconds)</p>
+            <div className="flex items-center gap-3">
+              <input
+                type="range"
+                min="0"
+                max="60"
+                step="5"
+                value={revealDelay}
+                onChange={(e) => setRevealDelay(parseInt(e.target.value))}
+                className="flex-1"
+              />
+              <span className="text-lg font-bold text-[#B80000] w-12 text-center">{revealDelay}s</span>
+            </div>
+            <div className="mt-2 flex gap-2">
+              <button
+                onClick={() => setRevealDelay(0)}
+                className="flex-1 px-3 py-1.5 text-xs bg-gray-200 hover:bg-gray-300 rounded transition-colors"
+              >
+                Instant
+              </button>
+              <button
+                onClick={() => setRevealDelay(10)}
+                className="flex-1 px-3 py-1.5 text-xs bg-gray-200 hover:bg-gray-300 rounded transition-colors"
+              >
+                10s
+              </button>
+              <button
+                onClick={() => setRevealDelay(30)}
+                className="flex-1 px-3 py-1.5 text-xs bg-gray-200 hover:bg-gray-300 rounded transition-colors"
+              >
+                30s
+              </button>
+            </div>
+          </div>
+
+          <h3 className="font-semibold text-gray-700 mb-3">Pages</h3>
           <ul className="space-y-2">
             {routes.map((route) => (
               <li key={route.path}>
