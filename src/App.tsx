@@ -37,7 +37,6 @@ function App() {
   const [contentRevealed, setContentRevealed] = useState(false);
   const [scrollRequested, setScrollRequested] = useState(false);
 
-  console.log('contentRevealed:', contentRevealed);
 
   const scrollToOffers = () => {
     if (!contentRevealed) {
@@ -65,25 +64,24 @@ function App() {
     let hasScrolled = false;
 
     const handleScroll = () => {
-      console.log('handleScroll chamado', {
-        hasScrolled,
-        scrollY: window.scrollY,
-        contentRevealed
-      });
-
       if (!hasScrolled && window.scrollY > 20 && !contentRevealed) {
         hasScrolled = true;
-        console.log('✅ REVELANDO CONTEÚDO AGORA');
         setContentRevealed(true);
         setScrollRequested(true);
       }
     };
 
+    const revealTimer = setTimeout(() => {
+      if (!contentRevealed) {
+        setContentRevealed(true);
+      }
+    }, 10000);
+
     window.addEventListener('scroll', handleScroll, { passive: true });
-    console.log('Scroll listener adicionado');
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      clearTimeout(revealTimer);
     };
   }, [contentRevealed]);
 
