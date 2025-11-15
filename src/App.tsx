@@ -65,15 +65,22 @@ function App() {
     let hasScrolled = false;
 
     const handleScroll = () => {
+      console.log('handleScroll chamado', {
+        hasScrolled,
+        scrollY: window.scrollY,
+        contentRevealed
+      });
+
       if (!hasScrolled && window.scrollY > 100 && !contentRevealed) {
         hasScrolled = true;
-        console.log('Scroll detectado - revelando conteúdo');
+        console.log('✅ REVELANDO CONTEÚDO AGORA');
         setContentRevealed(true);
         setScrollRequested(true);
       }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
+    console.log('Scroll listener adicionado');
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
