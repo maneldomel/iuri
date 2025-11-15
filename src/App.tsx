@@ -392,38 +392,6 @@ function App() {
 
   return (
     <div className="min-h-screen bg-white overflow-x-hidden w-full">
-      {/* 🔧 DEBUG: Botão de teste para forçar reveal */}
-      {isDevelopment && (
-        <div style={{ position: 'fixed', top: '10px', right: '10px', zIndex: 9999, display: 'flex', gap: '10px' }}>
-          <button
-            onClick={() => {
-              console.log('🧪 Teste manual: Forçando reveal do conteúdo');
-              handleVideoPitchReached();
-            }}
-            style={{
-              padding: '10px 20px',
-              background: '#00ff00',
-              color: '#000',
-              border: 'none',
-              borderRadius: '5px',
-              fontWeight: 'bold',
-              cursor: 'pointer'
-            }}
-          >
-            🧪 TESTAR REVEAL
-          </button>
-          <div style={{
-            padding: '10px',
-            background: showRestOfContent ? '#00ff00' : '#ff0000',
-            color: '#000',
-            borderRadius: '5px',
-            fontWeight: 'bold'
-          }}>
-            {showRestOfContent ? '✅ VISÍVEL' : '❌ OCULTO'}
-          </div>
-        </div>
-      )}
-
       {/* Hero / VSL Section */}
       <section className={`min-h-screen flex items-center justify-center px-4 py-8 md:py-20 bg-gradient-to-br from-white via-gray-50 to-red-50 transition-opacity duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
         <div className="max-w-4xl mx-auto text-center">
@@ -460,11 +428,11 @@ function App() {
         ref={offersRef}
         className="py-8 md:py-20 px-4 bg-white transition-all duration-500"
         style={{
-          maxHeight: showRestOfContent ? '10000px' : '0',
-          overflow: showRestOfContent ? 'visible' : 'hidden',
-          opacity: showRestOfContent ? 1 : 0,
-          visibility: showRestOfContent ? 'visible' : 'hidden',
-          pointerEvents: showRestOfContent ? 'auto' : 'none'
+          maxHeight: '10000px',
+          overflow: 'visible',
+          opacity: 1,
+          visibility: 'visible',
+          pointerEvents: 'auto'
         }}
       >
         <div className="max-w-7xl mx-auto">
@@ -498,8 +466,8 @@ function App() {
                   onClick={() => window.location.href = 'https://pay.erectosbrutallis.com/checkout/197875571:1'}
                   className="smartplayer-scroll-event w-full max-w-md mx-auto bg-[#FFD600] text-gray-900 py-3 md:py-6 rounded-full font-bold hover:bg-[#FFC400] transition-all shadow-lg text-base md:text-2xl mb-3 md:mb-6"
                   style={{
-                    visibility: showPurchaseButton ? 'visible' : 'hidden',
-                    pointerEvents: showPurchaseButton ? 'auto' : 'none'
+                    visibility: 'visible',
+                    pointerEvents: 'auto'
                   }}
                 >
                   CLAIM OFFER NOW
@@ -619,7 +587,7 @@ function App() {
       {/* Por questões de espaço, as demais sections continuam iguais ao código original */}
 
       {/* Experts Section */}
-      <section className="py-8 md:py-20 px-4 bg-gradient-to-b from-white to-gray-50" style={{ display: showRestOfContent ? 'block' : 'none' }}>
+      <section className="py-8 md:py-20 px-4 bg-gradient-to-b from-white to-gray-50" >
         <div className="max-w-6xl mx-auto">
           <h2 className="text-2xl md:text-5xl font-bold text-center text-gray-900 mb-6 md:mb-16 px-2">
             Approved by Leading Men's Health Specialists
@@ -727,7 +695,7 @@ function App() {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-8 md:py-20 px-4 bg-white" style={{ display: showRestOfContent ? 'block' : 'none' }}>
+      <section className="py-8 md:py-20 px-4 bg-white" >
         <div className="max-w-6xl mx-auto">
           <h2 className="text-2xl md:text-5xl font-bold text-center text-gray-900 mb-3 px-2">
             Real Men. Real Results.
@@ -791,7 +759,7 @@ function App() {
       </section>
 
       {/* Media Section */}
-      <section className="py-8 md:py-20 px-4 bg-gradient-to-b from-white to-gray-50" style={{ display: showRestOfContent ? 'block' : 'none' }}>
+      <section className="py-8 md:py-20 px-4 bg-gradient-to-b from-white to-gray-50" >
         <div className="max-w-6xl mx-auto">
           <h2 className="text-2xl md:text-5xl font-bold text-center text-gray-900 mb-6 md:mb-16 px-2">
             Featured in Top Men's Health Outlets
@@ -868,7 +836,7 @@ function App() {
       </section>
 
       {/* Science & Manufacturing Section */}
-      <section className="py-8 md:py-20 px-4 bg-white" style={{ display: showRestOfContent ? 'block' : 'none' }}>
+      <section className="py-8 md:py-20 px-4 bg-white" >
         <div className="max-w-6xl mx-auto">
           <h2 className="text-2xl md:text-5xl font-bold text-center text-gray-900 mb-3 md:mb-8 px-2">
             Where Science Meets Strength.
@@ -1220,7 +1188,7 @@ function App() {
       )}
 
       {/* Final CTA Section */}
-      <section className="py-10 md:py-20 px-4 bg-gradient-to-br from-[#B80000] to-[#900000]" style={{ display: showRestOfContent ? 'block' : 'none' }}>
+      <section className="py-10 md:py-20 px-4 bg-gradient-to-br from-[#B80000] to-[#900000]" >
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-2xl md:text-6xl font-bold text-white mb-3 md:mb-6 px-2">
             Your Transformation Starts Today.
@@ -1235,7 +1203,7 @@ function App() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-black text-gray-400 py-8 px-4" style={{ display: showRestOfContent ? 'block' : 'none' }}>
+      <footer className="bg-black text-gray-400 py-8 px-4" >
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-8">
             <div className="text-2xl font-bold text-white mb-4">Erectos Brutallis</div>
