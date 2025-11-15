@@ -14,107 +14,6 @@ function Upsell({ bottles, pricePerBottle, checkoutLink }: UpsellProps) {
   const isUp1bt = location.pathname === '/up1bt';
   const isUp3bt = location.pathname === '/up3bt';
 
-  // Detecta ambiente Bolt
-  const isBoltEnvironment = window.location.hostname.includes('bolt.new') ||
-                           window.location.hostname.includes('stackblitz') ||
-                           window.location.hostname.includes('webcontainer') ||
-                           window.location.hostname === 'localhost' ||
-                           window.location.hostname === '127.0.0.1';
-
-  const [contentUnlocked, setContentUnlocked] = useState(isBoltEnvironment);
-  const contentUnlockedRef = useRef(isBoltEnvironment);
-
-  useEffect(() => {
-    console.log('%c📡 Inicializando detector VTurb (Upsell)...', 'color: #00aaff; font-weight: bold');
-    console.log('%c🔍 Hostname atual:', 'color: #00aaff', window.location.hostname);
-    console.log('%c🔍 Ambiente Bolt detectado:', 'color: #00aaff', isBoltEnvironment);
-    console.log('%c🔍 contentUnlocked:', 'color: #00aaff', contentUnlocked);
-    console.log('%c🔍 contentUnlockedRef.current:', 'color: #00aaff', contentUnlockedRef.current);
-
-    // Se estiver no Bolt, já mostra o conteúdo
-    if (isBoltEnvironment) {
-      console.log('%c✅ Ambiente Bolt - conteúdo sempre visível', 'color: #00ff00; font-weight: bold');
-      console.log('%c✅ contentUnlocked está setado como:', 'color: #00ff00', contentUnlocked);
-      return;
-    }
-
-    const unlockContent = () => {
-      if (!contentUnlockedRef.current) {
-        console.log('%c🔓 Desbloqueando conteúdo e scroll (Upsell)', 'color: #00ff00; font-weight: bold');
-        contentUnlockedRef.current = true;
-        setContentUnlocked(true);
-        document.body.style.overflow = 'auto';
-      }
-    };
-
-    // BLOQUEIA o scroll manual enquanto conteúdo não está desbloqueado
-    document.body.style.overflow = 'hidden';
-    console.log('%c🔒 Scroll manual BLOQUEADO até VTurb desbloquear', 'color: #ff0000; font-weight: bold');
-
-    // 🔧 Monitora scroll programático (do VTurb)
-    let lastScrollY = window.scrollY;
-    let scrollCheckCount = 0;
-
-    const detectScrollAttempt = () => {
-      const currentScrollY = window.scrollY;
-      scrollCheckCount++;
-
-      // Log a cada 60 verificações
-      if (scrollCheckCount % 60 === 0) {
-        console.log('%c📊 Monitorando scroll programático (Upsell)...', 'color: #888', {
-          currentScrollY,
-          lastScrollY,
-          contentUnlocked: contentUnlockedRef.current
-        });
-      }
-
-      const scrollDiff = Math.abs(currentScrollY - lastScrollY);
-
-      // Se houve scroll significativo E o overflow está hidden (não foi usuário)
-      if (scrollDiff > 4 && !contentUnlockedRef.current && document.body.style.overflow === 'hidden') {
-        console.log('%c🎯 SCROLL AUTOMÁTICO (VTurb) DETECTADO! (Upsell)', 'color: #ff0000; font-weight: bold; font-size: 16px');
-        console.log('%c📊 ScrollY anterior:', 'color: #ff9900', lastScrollY);
-        console.log('%c📊 ScrollY atual:', 'color: #ff9900', currentScrollY);
-        console.log('%c📊 Diferença:', 'color: #ff9900', scrollDiff);
-        unlockContent();
-      }
-
-      lastScrollY = currentScrollY;
-    };
-
-    // Monitora scroll com requestAnimationFrame
-    let rafId: number;
-    const checkScroll = () => {
-      detectScrollAttempt();
-      rafId = requestAnimationFrame(checkScroll);
-    };
-    rafId = requestAnimationFrame(checkScroll);
-
-    const handleVTurbScrollEvent = (e: Event) => {
-      console.log('%c🎯 Evento VTurb detectado! (Upsell)', 'color: #ff00ff; font-weight: bold', e.type);
-      e.preventDefault();
-      e.stopPropagation();
-      e.stopImmediatePropagation();
-      unlockContent();
-    };
-
-    // Eventos principais do VTurb
-    window.addEventListener('smartplayer-scroll-event', handleVTurbScrollEvent, true);
-    window.addEventListener('smartplayer:video:ended', handleVTurbScrollEvent, true);
-    window.addEventListener('smartplayer:cta:show', handleVTurbScrollEvent, true);
-
-    return () => {
-      if (!isBoltEnvironment) {
-        console.log('%c🧹 Limpando listeners (Upsell)...', 'color: #ff9900');
-        cancelAnimationFrame(rafId);
-        document.body.style.overflow = 'auto';
-        window.removeEventListener('smartplayer-scroll-event', handleVTurbScrollEvent, true);
-        window.removeEventListener('smartplayer:video:ended', handleVTurbScrollEvent, true);
-        window.removeEventListener('smartplayer:cta:show', handleVTurbScrollEvent, true);
-      }
-    };
-  }, [isBoltEnvironment]);
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-white via-gray-50 to-red-50 flex flex-col">
       <div className="w-full bg-[#B80000] py-4 px-4 flex items-center justify-center gap-2 md:gap-3 text-white font-bold text-sm md:text-base lg:text-lg sticky top-0 z-50 shadow-lg">
@@ -178,13 +77,6 @@ function Upsell({ bottles, pricePerBottle, checkoutLink }: UpsellProps) {
           </p>
         </div>
 
-        {isBoltEnvironment && (
-          <div className="bg-blue-500 text-white p-2 rounded mb-4 text-center text-sm">
-            🔧 DEBUG: Ambiente Bolt detectado - Conteúdo visível | contentUnlocked: {contentUnlocked.toString()}
-          </div>
-        )}
-
-        <div style={{ display: contentUnlocked ? 'block' : 'none' }}>
         {isUp1bt ? (
           <>
             <div className="bg-gradient-to-br from-[#C62828] to-[#B71C1C] rounded-[30px] p-8 md:p-12 shadow-2xl mb-6 relative">
@@ -388,7 +280,6 @@ function Upsell({ bottles, pricePerBottle, checkoutLink }: UpsellProps) {
             </button>
           </div>
         )}
-        </div>
         </div>
       </div>
     </div>
