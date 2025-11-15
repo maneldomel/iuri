@@ -467,11 +467,6 @@ function App() {
             aria-hidden="true"
           />
 
-          {!contentRevealed && (
-            <div className="mt-8 text-center text-gray-500 text-sm">
-              [DEBUG: Aguardando scroll do vídeo para revelar conteúdo...]
-            </div>
-          )}
         </div>
       </section>
 
