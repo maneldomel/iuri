@@ -12,11 +12,13 @@ function Navigation() {
 
   const isDevelopment = import.meta.env.DEV;
 
-  useEffect(() => {
-    localStorage.setItem('revealDelay', revealDelay.toString());
-    window.dispatchEvent(new CustomEvent('revealDelayChange', { detail: revealDelay }));
-    window.location.reload();
-  }, [revealDelay]);
+  const handleDelayChange = (newDelay: number) => {
+    setRevealDelay(newDelay);
+    localStorage.setItem('revealDelay', newDelay.toString());
+    setTimeout(() => {
+      window.location.reload();
+    }, 100);
+  };
 
   const routes = [
     { path: '/', label: 'Home' },
@@ -70,25 +72,31 @@ function Navigation() {
                 max="300"
                 value={revealDelay}
                 onChange={(e) => setRevealDelay(Math.max(0, parseInt(e.target.value) || 0))}
+                onBlur={(e) => handleDelayChange(Math.max(0, parseInt(e.target.value) || 0))}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    handleDelayChange(Math.max(0, parseInt(e.currentTarget.value) || 0));
+                  }
+                }}
                 className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#B80000] focus:border-transparent text-lg font-semibold text-center"
               />
               <span className="text-sm text-gray-600">seconds</span>
             </div>
             <div className="flex gap-2">
               <button
-                onClick={() => setRevealDelay(0)}
+                onClick={() => handleDelayChange(0)}
                 className="flex-1 px-3 py-1.5 text-xs bg-gray-200 hover:bg-gray-300 rounded transition-colors"
               >
                 Instant
               </button>
               <button
-                onClick={() => setRevealDelay(10)}
+                onClick={() => handleDelayChange(10)}
                 className="flex-1 px-3 py-1.5 text-xs bg-gray-200 hover:bg-gray-300 rounded transition-colors"
               >
                 10s
               </button>
               <button
-                onClick={() => setRevealDelay(30)}
+                onClick={() => handleDelayChange(30)}
                 className="flex-1 px-3 py-1.5 text-xs bg-gray-200 hover:bg-gray-300 rounded transition-colors"
               >
                 30s
