@@ -1,10 +1,12 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import App from './App';
 import Upsell from './pages/Upsell';
+import Navigation from './components/Navigation';
 
 function Router() {
   return (
     <BrowserRouter>
+      <Navigation />
       <Routes>
         <Route path="/" element={<App />} />
 
