@@ -61,20 +61,19 @@ function Navigation() {
               <Clock size={20} className="text-[#B80000]" />
               <h3 className="font-semibold text-gray-900">Content Reveal Timer</h3>
             </div>
-            <p className="text-sm text-gray-600 mb-3">Time until content appears (seconds)</p>
-            <div className="flex items-center gap-3">
+            <p className="text-sm text-gray-600 mb-3">Time until content appears</p>
+            <div className="flex items-center gap-2 mb-3">
               <input
-                type="range"
+                type="number"
                 min="0"
-                max="60"
-                step="5"
+                max="300"
                 value={revealDelay}
-                onChange={(e) => setRevealDelay(parseInt(e.target.value))}
-                className="flex-1"
+                onChange={(e) => setRevealDelay(Math.max(0, parseInt(e.target.value) || 0))}
+                className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#B80000] focus:border-transparent text-lg font-semibold text-center"
               />
-              <span className="text-lg font-bold text-[#B80000] w-12 text-center">{revealDelay}s</span>
+              <span className="text-sm text-gray-600">seconds</span>
             </div>
-            <div className="mt-2 flex gap-2">
+            <div className="flex gap-2">
               <button
                 onClick={() => setRevealDelay(0)}
                 className="flex-1 px-3 py-1.5 text-xs bg-gray-200 hover:bg-gray-300 rounded transition-colors"
