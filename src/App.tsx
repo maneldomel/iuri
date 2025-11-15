@@ -60,33 +60,26 @@ function App() {
   }, [contentRevealed, scrollRequested]);
 
   useEffect(() => {
-    const handleMessage = (event: MessageEvent) => {
-      console.log('Mensagem recebida:', event.data);
+    const button = sixBottleButtonRef.current;
+    if (!button) return;
 
-      if (event.data && typeof event.data === 'object') {
-        const data = event.data;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !contentRevealed) {
+            console.log('Botão ficou visível - revelando conteúdo');
+            setContentRevealed(true);
+            setScrollRequested(true);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
 
-        if (data.smartplayer_id ||
-            data.type === 'smartplayer' ||
-            data.event === 'scroll_target' ||
-            data.scrollTarget ||
-            (data.type && data.type.includes('scroll')) ||
-            (data.event && data.event.includes('scroll'))) {
+    observer.observe(button);
 
-          console.log('Evento de scroll detectado! Revelando conteúdo...');
-          setContentRevealed(true);
-          setScrollRequested(true);
-        }
-      }
-    };
-
-    window.addEventListener('message', handleMessage);
-    console.log('Listener de mensagens instalado. Aguardando evento do vturb...');
-
-    return () => {
-      window.removeEventListener('message', handleMessage);
-    };
-  }, []);
+    return () => observer.disconnect();
+  }, [contentRevealed]);
 
   useEffect(() => {
     const heroVideoScript = 'https://scripts.converteai.net/6c140fb2-fd70-48d5-8d70-c2f66a937ef9/players/69124ec0b910e6e322c32a69/v4/player.js';
