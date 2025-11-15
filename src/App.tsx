@@ -34,14 +34,127 @@ function App() {
   const [upsellTimer, setUpsellTimer] = useState(10);
   const [selectedPackage, setSelectedPackage] = useState<'3-bottle' | '1-bottle' | null>(null);
   const [expertVideosPlaying, setExpertVideosPlaying] = useState<{[key: number]: boolean}>({});
+  const [contentRevealed, setContentRevealed] = useState(false);
+  const [scrollRequested, setScrollRequested] = useState(false);
 
   const scrollToOffers = () => {
+    if (!contentRevealed) {
+      setContentRevealed(true);
+      setScrollRequested(true);
+      return;
+    }
     offersRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
   useEffect(() => {
     setIsVisible(true);
   }, []);
+
+  useEffect(() => {
+    if (contentRevealed && scrollRequested) {
+      setTimeout(() => {
+        offersRef.current?.scrollIntoView({ behavior: 'smooth' });
+        setScrollRequested(false);
+      }, 100);
+    }
+  }, [contentRevealed, scrollRequested]);
+
+  useEffect(() => {
+    const detectVturbScrollAttempt = () => {
+      const interval = setInterval(() => {
+        const button = sixBottleButtonRef.current;
+        if (button && !contentRevealed) {
+          const observer = new MutationObserver(() => {
+            if (!contentRevealed) {
+              setContentRevealed(true);
+              setScrollRequested(true);
+            }
+          });
+
+          observer.observe(button, {
+            attributes: true,
+            attributeFilter: ['class', 'style']
+          });
+
+          return () => observer.disconnect();
+        }
+      }, 500);
+
+      return () => clearInterval(interval);
+    };
+
+    const cleanup = detectVturbScrollAttempt();
+
+    const handleScrollEvent = (e: Event) => {
+      const target = e.target as HTMLElement;
+      if (target?.classList?.contains('smartplayer-scroll-event') ||
+          target?.hasAttribute('data-scroll-target')) {
+        if (!contentRevealed) {
+          e.preventDefault();
+          e.stopPropagation();
+          setContentRevealed(true);
+          setScrollRequested(true);
+        }
+      }
+    };
+
+    document.addEventListener('click', handleScrollEvent, true);
+
+    const checkVturbPlayer = setInterval(() => {
+      const players = document.querySelectorAll('vturb-smartplayer');
+      players.forEach((player: any) => {
+        if (player && !player._scrollDetectorAdded) {
+          player._scrollDetectorAdded = true;
+
+          player.addEventListener('smartplayer-scroll', () => {
+            if (!contentRevealed) {
+              setContentRevealed(true);
+              setScrollRequested(true);
+            }
+          });
+
+          const iframe = player.querySelector('iframe');
+          if (iframe) {
+            iframe.addEventListener('load', () => {
+              try {
+                const iframeWindow = iframe.contentWindow;
+                if (iframeWindow) {
+                  iframeWindow.addEventListener('message', (event: MessageEvent) => {
+                    if (event.data?.type === 'smartplayer-scroll' ||
+                        event.data?.action === 'scroll') {
+                      if (!contentRevealed) {
+                        setContentRevealed(true);
+                        setScrollRequested(true);
+                      }
+                    }
+                  });
+                }
+              } catch (e) {
+                console.log('Cross-origin iframe - usando método alternativo');
+              }
+            });
+          }
+        }
+      });
+    }, 500);
+
+    window.addEventListener('message', (event: MessageEvent) => {
+      if (event.data?.type === 'smartplayer-scroll' ||
+          event.data?.action === 'scroll' ||
+          event.data?.event === 'scroll') {
+        if (!contentRevealed) {
+          setContentRevealed(true);
+          setScrollRequested(true);
+        }
+      }
+    });
+
+    return () => {
+      cleanup();
+      document.removeEventListener('click', handleScrollEvent, true);
+      clearInterval(checkVturbPlayer);
+    };
+  }, [contentRevealed]);
 
   useEffect(() => {
     testimonials.forEach((testimonial) => {
@@ -423,16 +536,11 @@ function App() {
         </div>
       </section>
 
-      {/* 🔧 CORREÇÃO 2: Section SEMPRE no DOM, controle via visibility ao invés de display */}
       <section
         ref={offersRef}
-        className="py-8 md:py-20 px-4 bg-white transition-all duration-500"
+        className={`py-8 md:py-20 px-4 bg-white transition-all duration-500 ${contentRevealed ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
         style={{
-          maxHeight: '10000px',
-          overflow: 'visible',
-          opacity: 1,
-          visibility: 'visible',
-          pointerEvents: 'auto'
+          display: contentRevealed ? 'block' : 'none'
         }}
       >
         <div className="max-w-7xl mx-auto">
@@ -583,9 +691,8 @@ function App() {
         </div>
       </section>
 
-      {/* Resto do código continua igual... */}
-      {/* Por questões de espaço, as demais sections continuam iguais ao código original */}
-
+      {contentRevealed && (
+        <>
       {/* Experts Section */}
       <section className="py-8 md:py-20 px-4 bg-gradient-to-b from-white to-gray-50" >
         <div className="max-w-6xl mx-auto">
@@ -1293,6 +1400,8 @@ function App() {
             </div>
           </div>
         </div>
+      )}
+        </>
       )}
 
     </div>
