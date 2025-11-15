@@ -157,6 +157,19 @@ function App() {
   }, [contentRevealed]);
 
   useEffect(() => {
+    const heroVideoScript = 'https://scripts.converteai.net/6c140fb2-fd70-48d5-8d70-c2f66a937ef9/players/69124ec0b910e6e322c32a69/v4/player.js';
+    const existingHeroScript = document.querySelector(`script[src="${heroVideoScript}"]`);
+    if (!existingHeroScript) {
+      const script = document.createElement('script');
+      script.src = heroVideoScript;
+      script.async = true;
+      document.head.appendChild(script);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!contentRevealed) return;
+
     testimonials.forEach((testimonial) => {
       if (testimonial?.videoScript) {
         const existingScript = document.querySelector(`script[src="${testimonial.videoScript}"]`);
@@ -168,15 +181,6 @@ function App() {
         }
       }
     });
-
-    const heroVideoScript = 'https://scripts.converteai.net/6c140fb2-fd70-48d5-8d70-c2f66a937ef9/players/69124ec0b910e6e322c32a69/v4/player.js';
-    const existingHeroScript = document.querySelector(`script[src="${heroVideoScript}"]`);
-    if (!existingHeroScript) {
-      const script = document.createElement('script');
-      script.src = heroVideoScript;
-      script.async = true;
-      document.head.appendChild(script);
-    }
 
     const expertVideoScript = 'https://scripts.converteai.net/6c140fb2-fd70-48d5-8d70-c2f66a937ef9/players/69124f9036636797770589e5/v4/player.js';
     const existingExpertScript = document.querySelector(`script[src="${expertVideoScript}"]`);
@@ -204,7 +208,7 @@ function App() {
       script.async = true;
       document.head.appendChild(script);
     }
-  }, []);
+  }, [contentRevealed]);
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
