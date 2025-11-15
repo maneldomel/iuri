@@ -1,5 +1,4 @@
 import { AlertTriangle, CheckCircle, Truck, Shield, TrendingUp } from 'lucide-react';
-import { useLocation } from 'react-router-dom';
 
 interface Upsell2Props {
   inches: number;
@@ -8,7 +7,6 @@ interface Upsell2Props {
 }
 
 function Upsell2({ inches, price, checkoutLink }: Upsell2Props) {
-  const location = useLocation();
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-white via-gray-50 to-purple-50 flex flex-col">
@@ -191,7 +189,13 @@ function Upsell2({ inches, price, checkoutLink }: Upsell2Props) {
             </div>
 
             <button
-              onClick={() => window.location.href = checkoutLink || ''}
+              onClick={() => {
+                if (checkoutLink) {
+                  window.location.href = checkoutLink;
+                } else {
+                  alert('Checkout link not configured');
+                }
+              }}
               className="w-full max-w-md mx-auto bg-yellow-400 text-gray-900 py-3 sm:py-4 md:py-6 rounded-full font-bold hover:bg-yellow-300 transition-all shadow-lg text-sm sm:text-base md:text-xl leading-tight mb-4"
             >
               YES! I WANT TO GROW {inches} INCHES
@@ -224,7 +228,13 @@ function Upsell2({ inches, price, checkoutLink }: Upsell2Props) {
             </div>
 
             <button
-              onClick={() => window.location.href = checkoutLink || ''}
+              onClick={() => {
+                if (checkoutLink) {
+                  window.location.href = checkoutLink;
+                } else {
+                  alert('Checkout link not configured');
+                }
+              }}
               className="w-full max-w-md mx-auto bg-white/20 text-white py-2.5 sm:py-3 md:py-4 rounded-full font-bold hover:bg-white/30 transition-all shadow-md text-base sm:text-lg md:text-xl"
             >
               NO THANKS

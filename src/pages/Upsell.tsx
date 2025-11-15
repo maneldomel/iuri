@@ -1,6 +1,5 @@
 import { AlertTriangle, CheckCircle, Truck, Shield, Star } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
-import { useState, useEffect, useRef } from 'react';
 
 interface UpsellProps {
   bottles: number;
