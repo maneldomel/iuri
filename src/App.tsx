@@ -463,12 +463,11 @@ function App() {
         </div>
       </section>
 
+      {contentRevealed && (
+      <>
       <section
         ref={offersRef}
-        className={`py-8 md:py-20 px-4 bg-white transition-all duration-500 ${contentRevealed ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
-        style={{
-          display: contentRevealed ? 'block' : 'none'
-        }}
+        className="py-8 md:py-20 px-4 bg-white"
       >
         <div className="max-w-7xl mx-auto">
           <h2 className="text-2xl md:text-5xl font-bold text-center text-gray-900 mb-6 md:mb-16 px-2">
@@ -613,8 +612,6 @@ function App() {
         </div>
       </section>
 
-      {contentRevealed && (
-        <>
       {/* Experts Section */}
       <section className="py-8 md:py-20 px-4 bg-gradient-to-b from-white to-gray-50" >
         <div className="max-w-6xl mx-auto">
@@ -1323,7 +1320,7 @@ function App() {
           </div>
         </div>
       )}
-        </>
+      </>
       )}
 
     </div>
