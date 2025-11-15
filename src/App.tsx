@@ -62,25 +62,22 @@ function App() {
   }, [contentRevealed, scrollRequested]);
 
   useEffect(() => {
-    const scrollTarget = document.getElementById('vturb-scroll-target');
-    if (!scrollTarget) return;
+    let hasScrolled = false;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting && !contentRevealed) {
-            console.log('Scroll detectado - revelando conteúdo');
-            setContentRevealed(true);
-            setScrollRequested(true);
-          }
-        });
-      },
-      { threshold: 0.01 }
-    );
+    const handleScroll = () => {
+      if (!hasScrolled && window.scrollY > 100 && !contentRevealed) {
+        hasScrolled = true;
+        console.log('Scroll detectado - revelando conteúdo');
+        setContentRevealed(true);
+        setScrollRequested(true);
+      }
+    };
 
-    observer.observe(scrollTarget);
+    window.addEventListener('scroll', handleScroll, { passive: true });
 
-    return () => observer.disconnect();
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, [contentRevealed]);
 
   useEffect(() => {
