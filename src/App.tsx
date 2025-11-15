@@ -84,6 +84,7 @@ function App() {
     const revealTimer = setTimeout(() => {
       console.log('Timer fired! Revealing content...');
       setContentRevealed(true);
+      setScrollRequested(true);
     }, delay);
 
     window.addEventListener('scroll', handleScroll, { passive: true });
