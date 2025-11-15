@@ -71,7 +71,7 @@ function App() {
         contentRevealed
       });
 
-      if (!hasScrolled && window.scrollY > 100 && !contentRevealed) {
+      if (!hasScrolled && window.scrollY > 20 && !contentRevealed) {
         hasScrolled = true;
         console.log('✅ REVELANDO CONTEÚDO AGORA');
         setContentRevealed(true);
