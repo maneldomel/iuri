@@ -64,7 +64,7 @@ function App() {
     let hasScrolled = false;
 
     const handleScroll = () => {
-      if (!hasScrolled && window.scrollY > 20 && !contentRevealed) {
+      if (!hasScrolled && window.scrollY > 20) {
         hasScrolled = true;
         setContentRevealed(true);
         setScrollRequested(true);
@@ -73,16 +73,23 @@ function App() {
 
     const getRevealDelay = () => {
       const saved = localStorage.getItem('revealDelay');
-      return saved ? parseInt(saved) * 1000 : 10000;
+      const delay = saved ? parseInt(saved) * 1000 : 10000;
+      console.log('Reveal delay set to:', delay, 'ms');
+      return delay;
     };
 
+    const delay = getRevealDelay();
+    console.log('Starting timer with delay:', delay);
+
     const revealTimer = setTimeout(() => {
+      console.log('Timer fired! Revealing content...');
       setContentRevealed(true);
-    }, getRevealDelay());
+    }, delay);
 
     window.addEventListener('scroll', handleScroll, { passive: true });
 
     return () => {
+      console.log('Cleaning up timer');
       window.removeEventListener('scroll', handleScroll);
       clearTimeout(revealTimer);
     };
