@@ -77,25 +77,16 @@ function App() {
     };
 
     const revealTimer = setTimeout(() => {
-      if (!contentRevealed) {
-        setContentRevealed(true);
-      }
+      setContentRevealed(true);
     }, getRevealDelay());
 
-    const handleDelayChange = (event: Event) => {
-      const customEvent = event as CustomEvent;
-      clearTimeout(revealTimer);
-    };
-
     window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('revealDelayChange', handleDelayChange);
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('revealDelayChange', handleDelayChange);
       clearTimeout(revealTimer);
     };
-  }, [contentRevealed]);
+  }, []);
 
   useEffect(() => {
     const heroVideoScript = 'https://scripts.converteai.net/6c140fb2-fd70-48d5-8d70-c2f66a937ef9/players/69124ec0b910e6e322c32a69/v4/player.js';
