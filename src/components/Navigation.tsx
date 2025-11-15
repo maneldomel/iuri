@@ -15,6 +15,7 @@ function Navigation() {
   useEffect(() => {
     localStorage.setItem('revealDelay', revealDelay.toString());
     window.dispatchEvent(new CustomEvent('revealDelayChange', { detail: revealDelay }));
+    window.location.reload();
   }, [revealDelay]);
 
   const routes = [
