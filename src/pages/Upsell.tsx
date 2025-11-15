@@ -19,7 +19,7 @@ function Upsell({ bottles, pricePerBottle, checkoutLink }: UpsellProps) {
       <div className="w-full bg-[#B80000] py-4 px-4 flex items-center justify-center gap-2 md:gap-3 text-white font-bold text-sm md:text-base lg:text-lg sticky top-0 z-50 shadow-lg">
         <AlertTriangle className="w-5 h-5 md:w-6 md:h-6 flex-shrink-0 animate-pulse" />
         <AlertTriangle className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0 animate-pulse" />
-        <span className="text-center tracking-wide">WAIT! YOUR ORDER IS NOT COMPLETE</span>
+        <span className="text-center tracking-wide">Wait! Your order has not been completed yet!</span>
         <AlertTriangle className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0 animate-pulse" />
         <AlertTriangle className="w-5 h-5 md:w-6 md:h-6 flex-shrink-0 animate-pulse" />
       </div>
@@ -27,25 +27,17 @@ function Upsell({ bottles, pricePerBottle, checkoutLink }: UpsellProps) {
       <div className="flex-1 flex items-center justify-center px-4 py-8">
         <div className="max-w-4xl mx-auto text-center">
         <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold text-gray-900 mb-3 md:mb-4 leading-tight">
-          {isUp3bt ? (
-            <>There's still time to increase the <span className="text-[#B80000]">size</span> of your <span className="text-[#B80000]">instrument!</span></>
-          ) : (
-            <>You're Just <span className="text-[#B80000]">ONE</span> Step<br />Away From <span className="text-[#B80000]">Success</span></>
-          )}
+          Discover how to eliminate toxic testosterone and regain <span className="text-[#B80000]">steel-hard erections</span> in just <span className="text-[#B80000]">3 months</span> (instead of 6)
         </h1>
         <p className="text-lg sm:text-xl md:text-2xl text-gray-600 mb-8 md:mb-12 font-light max-w-3xl mx-auto">
-          {isUp3bt ? (
-            <>Congratulations on completing a full treatment, <span className="font-semibold text-gray-800">but now this product will <span className="text-[#B80000]">make you even more powerful!</span></span></>
-          ) : (
-            <>Congratulations on securing your first bottles - but now, <span className="font-semibold text-gray-800">one last step could <span className="text-[#B80000]">change everything</span></span></>
-          )}
+          Hello, Michael, here again! First of all, <span className="font-semibold text-gray-800">congratulations on purchasing <span className="text-[#B80000]">Erectos Brutallis!</span></span> Know that you have made one of the most important decisions of your life...
         </p>
 
         <div className="bg-yellow-50 border-2 border-yellow-400 rounded-xl p-3 mb-4 max-w-2xl mx-auto">
           <div className="flex items-center justify-center gap-2 text-gray-800">
             <Volume2 className="w-5 h-5 flex-shrink-0" />
             <p className="text-sm md:text-base font-bold">
-              Please make sure your sound is on!
+              Read this text until the end, as we have a big surprise for you.
             </p>
           </div>
         </div>
@@ -61,19 +53,19 @@ function Upsell({ bottles, pricePerBottle, checkoutLink }: UpsellProps) {
         <div className="flex items-center justify-center gap-2 text-gray-700 mb-3">
           <Volume2 className="w-5 h-5" />
           <p className="text-sm md:text-base font-medium">
-            Please make sure your sound is on
+            Your transformation starts today
           </p>
         </div>
         <p className="text-xs md:text-sm text-gray-500 mb-8">
-          This video contains important audio information
+          In just a few weeks, you will notice firmer, longer-lasting erections and renewed sexual drive.
         </p>
 
         <div className="bg-yellow-50 border-2 border-yellow-400 rounded-xl p-4 mb-8 max-w-2xl mx-auto">
           <p className="text-sm md:text-base font-semibold text-gray-800">
-            This is a unique, one-time offer
+            Here's how: instead of taking just one capsule per day, you'll take two
           </p>
           <p className="text-xs md:text-sm text-gray-600 mt-1">
-            Once you leave this page, this offer will never be available again
+            That means you can cut in half the time it would take to become the man you've always been.
           </p>
         </div>
 
@@ -81,11 +73,11 @@ function Upsell({ bottles, pricePerBottle, checkoutLink }: UpsellProps) {
           <>
             <div className="bg-gradient-to-br from-[#C62828] to-[#B71C1C] rounded-[30px] p-8 md:p-12 shadow-2xl mb-6 relative">
               <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-[#FFD600] text-gray-900 px-6 py-2 rounded-full font-bold text-sm md:text-base shadow-lg">
-                BEST VALUE
+                BEST VALUE - RESULTS IN 3 MONTHS
               </div>
               <div className="text-white mb-6">
                 <div className="text-4xl md:text-6xl font-bold mb-2">
-                  {bottles} Bottles
+                  {bottles} Bottles of Erectos Brutallis
                 </div>
                 <div className="text-xl md:text-3xl font-semibold">
                   ${pricePerBottle} per bottle
@@ -93,34 +85,34 @@ function Upsell({ bottles, pricePerBottle, checkoutLink }: UpsellProps) {
                 <div className="text-2xl md:text-4xl font-bold text-[#FFD600] mt-4">
                   Total: ${total}
                 </div>
+                <div className="text-base md:text-xl text-white/90 mt-2">
+                  + 180 extra days of warranty
+                </div>
               </div>
 
               <button
                 onClick={() => window.location.href = 'https://pay.erectosbrutallis.com/checkout/201842174:1'}
                 className="smartplayer-scroll-event w-full max-w-md mx-auto bg-[#FFD600] text-gray-900 py-4 md:py-6 rounded-full font-bold hover:bg-[#FFC400] transition-all shadow-lg text-xl md:text-2xl"
               >
-                UPGRADE MY ORDER NOW
+                YES! I WANT RESULTS IN 3 MONTHS, NOT 6
               </button>
             </div>
 
-            <div className="bg-gradient-to-br from-orange-500 to-orange-600 rounded-[20px] p-6 md:p-8 shadow-lg">
+            <div className="bg-gradient-to-br from-gray-600 to-gray-700 rounded-[20px] p-6 md:p-8 shadow-lg">
               <div className="text-white mb-4">
                 <div className="text-2xl md:text-4xl font-bold mb-2">
-                  2 Bottles
+                  No Thanks
                 </div>
-                <div className="text-lg md:text-2xl font-semibold">
-                  $34.5 per bottle
-                </div>
-                <div className="text-xl md:text-3xl font-bold mt-3">
-                  Total: $69
+                <div className="text-base md:text-lg">
+                  I prefer to wait 6 months for results
                 </div>
               </div>
 
               <button
                 onClick={() => window.location.href = 'https://pay.erectosbrutallis.com/checkout/201842172:1'}
-                className="w-full max-w-md mx-auto bg-[#FFD600] text-gray-900 py-3 md:py-5 rounded-full font-bold hover:bg-[#FFC400] transition-all shadow-md text-lg md:text-xl"
+                className="w-full max-w-md mx-auto bg-white/20 text-white py-3 md:py-5 rounded-full font-bold hover:bg-white/30 transition-all shadow-md text-lg md:text-xl"
               >
-                SELECT THIS OPTION
+                NO THANKS
               </button>
             </div>
           </>
@@ -130,36 +122,36 @@ function Upsell({ bottles, pricePerBottle, checkoutLink }: UpsellProps) {
               <div className="relative bg-gradient-to-br from-[#C62828] to-[#B71C1C] rounded-[30px] p-4 md:p-12 lg:p-16 shadow-2xl">
                 <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#FFD600] text-gray-900 px-6 py-2 rounded-full text-sm md:text-lg font-bold shadow-lg flex items-center gap-1 md:gap-2">
                   <Star className="w-4 h-4 md:w-5 md:h-5 fill-gray-900" />
-                  BEST VALUE
+                  BEST VALUE - RESULTS IN 3 MONTHS
                 </div>
                 <div className="text-center">
                   <img
-                    src="/erectos pulse-9 copy copy.png"
-                    alt="9 Drops Package"
+                    src="https://i.postimg.cc/FzHG0ng9/erectos-brutallis-13.png"
+                    alt="6 Bottles Package"
                     className="w-full h-48 md:h-80 lg:h-96 object-contain mb-3 md:mb-8 mt-2 md:mt-4"
                   />
-                  <h3 className="text-2xl md:text-5xl font-bold text-white mb-1 md:mb-2 tracking-wide">ERECTOS PULSE</h3>
-                  <p className="text-base md:text-2xl text-white/90 font-semibold mb-2 md:mb-4">9 DROPS PACKAGE</p>
+                  <h3 className="text-2xl md:text-5xl font-bold text-white mb-1 md:mb-2 tracking-wide">ERECTOS BRUTALLIS</h3>
+                  <p className="text-base md:text-2xl text-white/90 font-semibold mb-2 md:mb-4">6 BOTTLES PACKAGE</p>
                   <div className="text-2xl md:text-4xl font-bold text-[#FFD600] mb-3 md:mb-6">
-                    YOU'RE SAVING $1317
+                    $39 PER BOTTLE
                   </div>
                   <button
                     onClick={() => window.location.href = 'https://pay.erectosbrutallis.com/checkout/198160252:1'}
                     className="smartplayer-scroll-event w-full max-w-md mx-auto bg-[#FFD600] text-gray-900 py-3 md:py-6 rounded-full font-bold hover:bg-[#FFC400] transition-all shadow-lg text-base md:text-2xl mb-3 md:mb-6"
                   >
-                    CLAIM OFFER NOW
+                    YES! I WANT RESULTS IN 3 MONTHS, NOT 6
                   </button>
                   <div className="text-white/90 text-sm md:text-lg mb-3 md:mb-6">
-                    only <span className="font-bold">$32.66 per drop</span>
+                    Total: <span className="font-bold">$234</span>
                   </div>
                   <div className="flex justify-center items-center gap-3 md:gap-6 text-white/90 text-xs md:text-base mb-3 md:mb-6">
                     <div className="flex items-center gap-1 md:gap-2">
                       <CheckCircle className="w-4 h-4 md:w-5 md:h-5" />
-                      <span>180-Day</span>
+                      <span>180-Day Warranty</span>
                     </div>
                     <div className="flex items-center gap-1 md:gap-2">
                       <Truck className="w-4 h-4 md:w-5 md:h-5" />
-                      <span>Free Ship</span>
+                      <span>Free Shipping</span>
                     </div>
                     <div className="flex items-center gap-1 md:gap-2">
                       <Shield className="w-4 h-4 md:w-5 md:h-5" />
@@ -177,108 +169,71 @@ function Upsell({ bottles, pricePerBottle, checkoutLink }: UpsellProps) {
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-4 md:gap-8 mb-8 md:mb-12">
-              <div className="relative bg-gradient-to-br from-[#EF5350] to-[#E53935] rounded-[30px] p-4 md:p-10 shadow-xl">
-                <div className="text-center">
-                  <img
-                    src="/erectos pulse-7 copy copy.png"
-                    alt="6 Drops Package"
-                    className="w-full h-32 md:h-56 object-contain mb-2 md:mb-4"
-                  />
-                  <h3 className="text-lg md:text-3xl font-bold text-white mb-0.5 md:mb-1 tracking-wide">ERECTOS PULSE</h3>
-                  <p className="text-sm md:text-lg text-white/90 font-semibold mb-2 md:mb-3">6 DROPS PACKAGE</p>
-                  <div className="text-xl md:text-3xl font-bold text-[#FFD600] mb-2 md:mb-4">
-                    SAVE $867
-                  </div>
-                  <button
-                    onClick={() => window.location.href = 'https://pay.erectosbrutallis.com/checkout/197882331:1'}
-                    className="smartplayer-scroll-event w-full bg-[#FFD600] text-gray-900 py-3 md:py-5 rounded-full font-bold hover:bg-[#FFC400] transition-all text-base md:text-xl mb-2 md:mb-4"
-                  >
-                    BUY NOW
-                  </button>
-                  <div className="text-white/90 text-xs md:text-base mb-2 md:mb-4">
-                    $34.50 per drop
-                  </div>
-                  <div className="flex justify-center items-center gap-3 md:gap-4 text-white/90 text-xs md:text-sm">
-                    <div className="flex items-center gap-1">
-                      <CheckCircle className="w-3 h-3 md:w-4 md:h-4" />
-                      <span>180d</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <Truck className="w-3 h-3 md:w-4 md:h-4" />
-                      <span>Free</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <Shield className="w-3 h-3 md:w-4 md:h-4" />
-                      <span>Safe</span>
-                    </div>
-                  </div>
+            <div className="bg-gradient-to-br from-gray-600 to-gray-700 rounded-[20px] p-6 md:p-8 shadow-lg">
+              <div className="text-white mb-4">
+                <div className="text-2xl md:text-4xl font-bold mb-2">
+                  No Thanks
+                </div>
+                <div className="text-base md:text-lg">
+                  I prefer to wait 6 months for results
                 </div>
               </div>
 
-              <div className="relative bg-gradient-to-br from-[#FF7043] to-[#FF5722] rounded-[30px] p-4 md:p-10 shadow-xl">
-                <div className="text-center">
-                  <img
-                    src="/erectos pulse-10 copy copy.png"
-                    alt="3 Drops Package"
-                    className="w-full h-32 md:h-56 object-contain mb-2 md:mb-4"
-                  />
-                  <h3 className="text-lg md:text-3xl font-bold text-white mb-0.5 md:mb-1 tracking-wide">ERECTOS PULSE</h3>
-                  <p className="text-sm md:text-lg text-white/90 font-semibold mb-2 md:mb-3">3 DROPS PACKAGE</p>
-                  <div className="text-xl md:text-3xl font-bold text-[#FFD600] mb-2 md:mb-4">
-                    SAVE $389
-                  </div>
-                  <button
-                    onClick={() => window.location.href = 'https://pay.erectosbrutallis.com/checkout/197882332:1'}
-                    className="w-full bg-[#FFD600] text-gray-900 py-3 md:py-5 rounded-full font-bold hover:bg-[#FFC400] transition-all text-base md:text-xl mb-2 md:mb-4"
-                  >
-                    BUY NOW
-                  </button>
-                  <div className="text-white/90 text-xs md:text-base mb-2 md:mb-4">
-                    $49.33 per drop
-                  </div>
-                  <div className="flex justify-center items-center gap-3 md:gap-4 text-white/90 text-xs md:text-sm">
-                    <div className="flex items-center gap-1">
-                      <CheckCircle className="w-3 h-3 md:w-4 md:h-4" />
-                      <span>180d</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <Truck className="w-3 h-3 md:w-4 md:h-4" />
-                      <span>Free</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <Shield className="w-3 h-3 md:w-4 md:h-4" />
-                      <span>Safe</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <button
+                onClick={() => window.location.href = 'https://pay.erectosbrutallis.com/checkout/197882332:1'}
+                className="w-full max-w-md mx-auto bg-white/20 text-white py-3 md:py-5 rounded-full font-bold hover:bg-white/30 transition-all shadow-md text-lg md:text-xl"
+              >
+                NO THANKS
+              </button>
             </div>
           </>
         ) : (
-          <div className="bg-gradient-to-br from-[#C62828] to-[#B71C1C] rounded-[30px] p-8 md:p-12 shadow-2xl mb-6 relative">
-            <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-[#FFD600] text-gray-900 px-6 py-2 rounded-full font-bold text-sm md:text-base shadow-lg">
-              BEST VALUE
-            </div>
-            <div className="text-white mb-6">
-              <div className="text-4xl md:text-6xl font-bold mb-2">
-                {bottles} Bottles
+          <>
+            <div className="bg-gradient-to-br from-[#C62828] to-[#B71C1C] rounded-[30px] p-8 md:p-12 shadow-2xl mb-6 relative">
+              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-[#FFD600] text-gray-900 px-6 py-2 rounded-full font-bold text-sm md:text-base shadow-lg">
+                RESULTS IN 3 MONTHS
               </div>
-              <div className="text-xl md:text-3xl font-semibold">
-                ${pricePerBottle} per bottle
+              <div className="text-white mb-6">
+                <div className="text-4xl md:text-6xl font-bold mb-2">
+                  {bottles} Bottles of Erectos Brutallis
+                </div>
+                <div className="text-xl md:text-3xl font-semibold">
+                  ${pricePerBottle} per bottle
+                </div>
+                <div className="text-2xl md:text-4xl font-bold text-[#FFD600] mt-4">
+                  Total: ${total}
+                </div>
+                <div className="text-base md:text-xl text-white/90 mt-2">
+                  + 60 extra days of warranty
+                </div>
               </div>
-              <div className="text-2xl md:text-4xl font-bold text-[#FFD600] mt-4">
-                Total: ${total}
-              </div>
+
+              <button
+                onClick={() => window.location.href = checkoutLink || ''}
+                className="w-full max-w-md mx-auto bg-[#FFD600] text-gray-900 py-4 md:py-6 rounded-full font-bold hover:bg-[#FFC400] transition-all shadow-lg text-xl md:text-2xl"
+              >
+                YES! I WANT RESULTS IN 3 MONTHS, NOT 6
+              </button>
             </div>
 
-            <button
-              onClick={() => window.location.href = checkoutLink || ''}
-              className="w-full max-w-md mx-auto bg-[#FFD600] text-gray-900 py-4 md:py-6 rounded-full font-bold hover:bg-[#FFC400] transition-all shadow-lg text-xl md:text-2xl"
-            >
-              UPGRADE MY ORDER NOW
-            </button>
-          </div>
+            <div className="bg-gradient-to-br from-gray-600 to-gray-700 rounded-[20px] p-6 md:p-8 shadow-lg">
+              <div className="text-white mb-4">
+                <div className="text-2xl md:text-4xl font-bold mb-2">
+                  No Thanks
+                </div>
+                <div className="text-base md:text-lg">
+                  I prefer to wait 6 months for results
+                </div>
+              </div>
+
+              <button
+                onClick={() => window.location.href = checkoutLink || ''}
+                className="w-full max-w-md mx-auto bg-white/20 text-white py-3 md:py-5 rounded-full font-bold hover:bg-white/30 transition-all shadow-md text-lg md:text-xl"
+              >
+                NO THANKS
+              </button>
+            </div>
+          </>
         )}
         </div>
       </div>
