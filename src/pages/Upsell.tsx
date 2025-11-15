@@ -1,4 +1,4 @@
-import { Play, Volume2, AlertTriangle, CheckCircle, Truck, Shield, Star } from 'lucide-react';
+import { AlertTriangle, CheckCircle, Truck, Shield, Star } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
 
@@ -33,39 +33,103 @@ function Upsell({ bottles, pricePerBottle, checkoutLink }: UpsellProps) {
           Hello, Dwayne, here again! First of all, <span className="font-semibold text-gray-800">congratulations on purchasing <span className="text-[#B80000]">Erectos Brutallis!</span></span> Know that you have made one of the most important decisions of your life...
         </p>
 
-        <div className="bg-yellow-50 border-2 border-yellow-400 rounded-xl p-3 mb-4 max-w-2xl mx-auto">
-          <div className="flex items-center justify-center gap-2 text-gray-800">
-            <Volume2 className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" />
-            <p className="text-xs sm:text-sm md:text-base font-bold">
+        <div className="bg-yellow-50 border-2 border-yellow-400 rounded-xl p-4 md:p-5 mb-6 max-w-3xl mx-auto">
+          <div className="flex items-center justify-center gap-2 text-gray-800 mb-3">
+            <AlertTriangle className="w-5 h-5 md:w-6 md:h-6 flex-shrink-0 text-[#B80000]" />
+            <p className="text-sm sm:text-base md:text-lg font-bold">
               Read this text until the end, as we have a big surprise for you.
             </p>
           </div>
         </div>
 
-        <div className="relative w-full max-w-sm md:max-w-md mx-auto bg-black rounded-[20px] overflow-hidden shadow-2xl aspect-[9/16] mb-4">
-          <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-gray-900 to-black">
-            <button className="w-16 h-16 md:w-20 md:h-20 bg-[#B80000] rounded-full flex items-center justify-center hover:bg-[#900000] transition-all hover:scale-110 shadow-xl">
-              <Play className="w-8 h-8 md:w-10 md:h-10 text-white ml-1" fill="white" />
-            </button>
+        <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-lg p-6 md:p-10 mb-6 md:mb-8">
+          <div className="prose prose-sm md:prose-base max-w-none text-gray-700 leading-relaxed space-y-4">
+            <p>The first step has already been taken, and I'm super excited to hear your testimony in a few weeks saying: <span className="font-semibold text-[#B80000]">"Dwayne, I managed to recover my sexual potency, my confidence is back, and today I feel like a real man again..."</span></p>
+
+            <p className="font-semibold text-gray-900">I want you to see today as the last day you worry about erection problems!</p>
+
+            <p>In just a few weeks, you will notice <span className="font-semibold">firmer, longer-lasting erections and renewed sexual drive.</span></p>
+
+            <p>Your partner will notice and be impressed with your transformation...</p>
+
+            <p>Thousands of men are regaining their virility with Erectos Brutallis, naturally, safely, and without side effects.</p>
+
+            <p className="text-lg md:text-xl font-bold text-gray-900 pt-4">Although it's only a matter of time before you regain the sexual vigor of your youth, I want to offer you a chance to get even faster results with Erectos Brutallis.</p>
+
+            <p>As you know, the ideal time to eliminate all toxic testosterone from your body is <span className="font-semibold">6 months.</span></p>
+
+            <p className="text-lg font-bold text-[#B80000]">But what if I told you there's a way to cut that time down to 3 months?</p>
+
+            <p><span className="font-semibold">Here's how:</span> instead of taking just one capsule per day, you'll take two and consequently get double the effects of Erectos Brutallis.</p>
+
+            <p>That means you can cut in half the time it would take to become the man you've always been.</p>
+
+            <p className="font-semibold">Capable of satisfying your wife whenever you want, and never struggling to get hard again.</p>
+
+            <div className="bg-red-50 border-l-4 border-[#B80000] p-4 my-6">
+              <p className="font-bold text-gray-900 mb-2">It means that in 3 months, you'll have:</p>
+              <ul className="list-disc list-inside space-y-2 text-gray-800">
+                <li>The same energy and performance as a 25-year-old</li>
+                <li>Firmer and longer-lasting erections</li>
+                <li>Energy and libido renewed almost immediately</li>
+                <li>Full confidence when it counts, with no fear of failure</li>
+              </ul>
+            </div>
+
+            <p>On the first day taking two capsules, you'll already feel the blood flowing intensely to your penile region.</p>
+
+            <p>A powerful sensation, like a magnet pulling all the blood to your intimate area, resulting in <span className="font-semibold text-[#B80000]">firm erections ready for action.</span></p>
+
+            <p className="font-semibold">Your partner will quickly notice this difference. Don't be surprised if she is impressed with your renewed performance.</p>
+
+            <p className="bg-yellow-100 border border-yellow-400 p-3 rounded-lg">I even recommend you warn your partner before taking the two capsules, because your manhood will stay hard for so long that she'll suffer the consequences.</p>
+
+            <p className="text-lg font-bold text-gray-900 pt-4">Taking two capsules per day for 3 months, you're buying the most important thing in your life: TIME.</p>
+
+            <p className="text-xl font-bold text-[#B80000]">Why not reverse erectile dysfunction as fast as possible?</p>
+
+            <p>I'm sure that's something you want, and I'm giving you the opportunity to do so.</p>
           </div>
         </div>
 
-        <div className="flex items-center justify-center gap-2 text-gray-700 mb-2">
-          <Volume2 className="w-4 h-4 md:w-5 md:h-5" />
-          <p className="text-xs sm:text-sm md:text-base font-medium">
-            Your transformation starts today
-          </p>
+        <div className="bg-gradient-to-r from-yellow-100 to-yellow-50 border-2 border-yellow-400 rounded-2xl p-5 md:p-6 mb-6 md:mb-8 max-w-3xl mx-auto">
+          <div className="text-center">
+            <p className="text-base md:text-lg font-bold text-gray-900 mb-3">Now answer honestly:</p>
+            <div className="space-y-2 text-sm md:text-base text-gray-800">
+              <p>• Can your freedom and masculinity wait?</p>
+              <p>• Do you want to keep struggling for 6 months instead of solving it in 3?</p>
+              <p>• Can your partner wait months for you, or does she deserve to feel maximum pleasure immediately?</p>
+              <p>• Can your confidence to make your partner climax multiple times wait?</p>
+            </div>
+            <p className="text-lg md:text-xl font-bold text-[#B80000] mt-4">Tell me, do you prefer all this to happen in 6 months or 3 months?</p>
+            <p className="text-base md:text-lg font-bold text-gray-900 mt-3">Without a doubt, the best decision is to get all the results in 3 months.</p>
+          </div>
         </div>
-        <p className="text-xs sm:text-sm md:text-base text-gray-500 mb-6 px-4">
-          In just a few weeks, you will notice firmer, longer-lasting erections and renewed sexual drive.
-        </p>
 
-        <div className="bg-yellow-50 border-2 border-yellow-400 rounded-xl p-3 md:p-4 mb-6 md:mb-8 max-w-2xl mx-auto">
-          <p className="text-xs sm:text-sm md:text-base font-semibold text-gray-800">
-            Here's how: instead of taking just one capsule per day, you'll take two
+        <div className="max-w-4xl mx-auto bg-gradient-to-br from-green-50 to-emerald-50 border-2 border-green-400 rounded-2xl p-6 md:p-8 mb-6 md:mb-8 shadow-lg">
+          <div className="text-center">
+            <div className="flex items-center justify-center gap-2 mb-4">
+              <Shield className="w-8 h-8 md:w-10 md:h-10 text-green-600" />
+              <h3 className="text-xl md:text-2xl font-bold text-gray-900">NO RISKS GUARANTEE</h3>
+            </div>
+            <p className="text-base md:text-lg text-gray-800 mb-4">
+              <span className="font-bold text-green-700">If after 3 months</span> taking two capsules a day you are not cured of erectile dysfunction,
+            </p>
+            <p className="text-lg md:text-xl font-bold text-gray-900 mb-4">
+              Just send us a message and we will <span className="text-green-700">immediately refund all the money</span> you invested.
+            </p>
+            <p className="text-base md:text-lg font-bold text-[#B80000]">
+              Don't waste time, you're protected.
+            </p>
+          </div>
+        </div>
+
+        <div className="text-center mb-6 md:mb-8">
+          <p className="text-xl md:text-2xl font-bold text-gray-900 mb-2">
+            Click the button below and choose your kit.
           </p>
-          <p className="text-xs sm:text-sm md:text-base text-gray-600 mt-1">
-            That means you can cut in half the time it would take to become the man you've always been.
+          <p className="text-base md:text-lg text-gray-600">
+            Remember, you won't have another chance like this.
           </p>
         </div>
 
