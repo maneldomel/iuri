@@ -37,6 +37,8 @@ function App() {
   const [contentRevealed, setContentRevealed] = useState(false);
   const [scrollRequested, setScrollRequested] = useState(false);
 
+  console.log('contentRevealed:', contentRevealed);
+
   const scrollToOffers = () => {
     if (!contentRevealed) {
       setContentRevealed(true);
@@ -433,7 +435,7 @@ function App() {
   const prevLab = () => setCurrentLab((prev) => (prev - 1 + labImages.length) % labImages.length);
 
   return (
-    <div className="min-h-screen bg-white overflow-x-hidden w-full">
+    <div className={`min-h-screen overflow-x-hidden w-full transition-colors duration-500 ${contentRevealed ? 'bg-white' : 'bg-gradient-to-br from-white via-gray-50 to-red-50'}`}>
       {/* Hero / VSL Section */}
       <section className={`min-h-screen flex items-center justify-center px-4 py-8 md:py-20 bg-gradient-to-br from-white via-gray-50 to-red-50 transition-opacity duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
         <div className="max-w-4xl mx-auto text-center">
@@ -460,6 +462,12 @@ function App() {
             }}
             aria-hidden="true"
           />
+
+          {!contentRevealed && (
+            <div className="mt-8 text-center text-gray-500 text-sm">
+              [DEBUG: Aguardando scroll do vídeo para revelar conteúdo...]
+            </div>
+          )}
         </div>
       </section>
 
